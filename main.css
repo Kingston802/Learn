@@ -1,0 +1,62 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  overflow: hidden;
+}
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
+.card {
+  margin: .5em auto;
+  width: 40vw;
+  height: 50vh;
+  transition: all 0.2s;
+  perspective: 9000px;
+}
+.front, .back {
+  padding: 2em;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  min-height: 100%;
+  text-align: left;
+  backface-visibility: hidden;
+  transform-style: preserve3d;
+  transition: all 0.4s;
+  color: white;
+  font-size: 2em;
+}
+.front {
+  background: #EA526F;
+}
+.back {
+  background: #23B5D3;
+  transform: rotateY(-180deg);
+}
+.flipped .back {
+  transform: rotateY(0deg);
+}
+.flipped .front {
+  transform: rotateY(180deg);
+}
+
+header {
+  margin: 40vh 20vw;
+}
+header h1 {
+  font-size: 4em;
+}
+header h2 {
+  color: gray;
+  margin-left: 1em;
+}
+
+.hidden { 
+  display: none;
+  visibility: hidden;
+}
