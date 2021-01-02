@@ -3,21 +3,17 @@ const cards = document.querySelector('.cards');
 
 window.onload = () => {
   console.log("loaded");
+  document.addEventListener('click', open);
 };
 
-let exampleCard = {
-  front: 'Car',
-  reverse: 'A typically 4 wheeled vehicle'
-}
-
-function addCard(card) {
+function addCards(values) {
   const html = `
     <div class="card">
       <div class="front">
-        ${ card.front }
+        ${ values[0] }
       </div>
       <div class="back">
-        ${ card.reverse }
+        ${ values[1] }
       </div>
     </div> 
   `
@@ -28,16 +24,34 @@ function addCard(card) {
   });
 }
 
+async function cardData(url) {
+  const re = /https?:\/\/github.com\/([a-zA-Z0-9-]*\/[^!@#$%^&*()_+-={}\[\];:'",<.>/?`~]+\/?)/
+  matches = url.match(re);
 
-function open(e) {
-  // Move header to the corner
+  let output = '';
+  fetch('https://raw.githubusercontent.com/' + matches[1] + '/master/cards.md')
+  .then(function(response) {
+    return response.text().then(function(text) {
+      const values = text.split(/\n/);
+      addCards(values);
+    });
+  });
+}
+
+
+function open() {
+  // hide header
   const header = document.querySelector('header');
-  header.querySelector('h2').classList.add('hidden');
-  header.style.margin = '5vh 5vw';
+  header.classList.add('hidden');
+  
+  // get url 
+  const exampleURL = 'https://github.com/Kingston802/Learn';
+
+  // download cards 
+  let cardValues = cardData(exampleURL);
 
   // Reveal first card 
-  addCard(exampleCard);
+  console.log(cardValues);
   cards.classList.remove('hidden');
   document.removeEventListener('click', open);
 };
-document.addEventListener('click', open);
