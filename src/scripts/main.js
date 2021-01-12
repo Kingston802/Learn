@@ -1,59 +1,66 @@
 const showdown = window.showdown;
 let converter = new showdown.Converter();
 let clickMenu = false;
-const cards = document.querySelector('.cards');
+let currentCard = 0;
+let values = [];
+const card = document.querySelector('.card');
+const header = document.querySelector('header');
 
 window.onload = () => {
-  console.log("loaded");
+  // console.log("loaded");
   document.addEventListener('click', open);
 };
 
-function addCards(values) {
-  const html = `
-    <div class="card">
-      <div class="front">
-        ${ converter.makeHtml(values[0]) }
-      </div>
-      <div class="back">
-        ${ converter.makeHtml(values[1]) }
-      </div>k
-    </div> 
+function updateCard() {
+  console.log(currentCard);
+  if (currentCard > (values.length-1)/2) { 
+    window.alert('cards finished!');
+    return
+  }
+  let [ front, back ] = [ values[currentCard*2], values[currentCard*2+1] ];
+  let html = `
+    <div class="front">
+      ${ converter.makeHtml(front) }
+    </div>
+    <div class="back">
+      ${ converter.makeHtml(back) }
+    </div>
   `
-  cards.innerHTML = html;
-  const cardElement = document.querySelector('.card');
-  cardElement.addEventListener('click', (c) => {
-    cardElement.classList.toggle('flipped');
-  });
+  card.innerHTML = html;
 }
 
 async function cardData(url) {
   const re = /https?:\/\/github.com\/([a-zA-Z0-9-]*\/[^!@#$%^&*()_+-={}\[\];:'",<.>/?`~]+\/?)/
   matches = url.match(re);
 
-  let output = '';
   fetch('https://raw.githubusercontent.com/' + matches[1] + '/master/cards.md')
   .then(function(response) {
     return response.text().then(function(text) {
-      const values = text.split(/\n/);
-      addCards(values);
+      values = text.split(/\n/);
+
+      updateCard();
+      card.classList.remove('hidden');
     });
   });
+
 }
 
-
 function open() {
+  document.removeEventListener('click', open);
   // hide header
-  const header = document.querySelector('header');
   header.classList.add('hidden');
   
   // get url 
   const exampleURL = 'https://github.com/Kingston802/Learn';
 
-  // download cards 
-  let cardValues = cardData(exampleURL);
+  // download and open cards 
+  cardData(exampleURL);
 
-  // Reveal first card 
-  console.log(cardValues);
-  cards.classList.remove('hidden');
-  document.removeEventListener('click', open);
+  card.addEventListener('click', (c) => {
+    if(!card.classList.toggle('flipped')) {
+      currentCard += 1;
+      updateCard();
+    }
+  });
 };
+
