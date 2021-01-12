@@ -1,3 +1,6 @@
+// const showdown = window.showdown;
+// console.log(showdown);
+// let converter = new showdown.Converter();
 let clickMenu = false;
 const cards = document.querySelector('.cards');
 
@@ -10,10 +13,10 @@ function addCards(values) {
   const html = `
     <div class="card">
       <div class="front">
-        ${ values[0] }
+        ${ (values[0]) }
       </div>
       <div class="back">
-        ${ values[1] }
+        ${ (values[1]) }
       </div>
     </div> 
   `
