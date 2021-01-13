@@ -3,10 +3,12 @@ const showdownKatex = window.showdownKatex;
 const converter = new showdown.Converter({
     extensions: [
       showdownKatex({
-        // maybe you want katex to throwOnError
-        throwOnError: true,
-        // disable displayMode
-        displayMode: false,
+        displayMode: true,
+        throwOnError: false, // allows katex to fail silently
+        delimiters: [
+          { left: "$", right: "$", display: false },
+          { left: '~', right: '~', display: false, asciimath: true },
+        ], 
         // change errorColor to blue
         errorColor: '#1500ff',
       }),

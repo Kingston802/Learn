@@ -8,7 +8,7 @@ branch in the root directory and paste the link to your repo into the Github pag
 
 ### Writing your own deck 
 Learn uses [showdown](http://showdownjs.com/) and [showdown-katex](https://obedm503.github.io/showdown-katex/) for Markdown and Katex support. 
-Right now, you can only use single-line expressions i.e. ```$e=mc^2$``` for LaTeX or ```~2+2=5~``` for AsciiMath. 
+Right now, you can only use single-line expressions i.e. ```$E=mc^2$``` for LaTeX or ```~2+2=5~``` for AsciiMath. 
 To create a card, you just need two lines, one for the front and one for the back.
 The first line will be the front and the second for the back, make sure you leave no whitespace (linebreaks, extra lines).
 
