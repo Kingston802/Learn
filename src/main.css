@@ -44,6 +44,10 @@ body {
   transform: rotateY(180deg);
 }
 
+.katex-html {
+  display: none;
+}
+
 header {
   display: flex;
   margin: 40vh 20vw;  

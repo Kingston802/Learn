@@ -65,6 +65,29 @@ async function cardData(url) {
     return response.text().then(function(text) {
       values = text.split(/\n/);
 
+      // preprocess text 
+      // TODO: add support for multiline LaTeX expressions
+      // let tempArr = [];
+      // let stack = [];
+      // values.forEach((val) => {
+      //   console.log(stack);
+      //   if (stack.length > 1 && val === '```') {
+      //     // push whole expression into tempArr
+      //     stack.push(val);
+      //     tempArr.push(stack.join('\n'));
+      //     // clear stack
+      //     stack = [];
+      //   } else if (val.includes('```') || (stack.length > 0)) {
+      //     console.log('IN AN EXPRESSION');
+      //     stack.push(val);
+      //   } else {
+      //     tempArr.push(val);
+      //   }
+      // });
+
+      // values = tempArr;
+      // console.log(values);
+
       updateCard();
       card.classList.remove('hidden');
     });
