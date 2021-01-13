@@ -8,7 +8,14 @@ const header = document.querySelector('header');
 
 window.onload = () => {
   // console.log("loaded");
-  document.addEventListener('click', open);
+  // document.addEventListener('click', open);
+  function submitOnEnter(event){
+      if(event.which === 13){
+          open();
+          event.preventDefault(); // Prevents the addition of a new line in the text field (not needed in a lot of cases)
+      }
+  }
+  document.getElementById("url").addEventListener("keypress", submitOnEnter);
 };
 
 function updateCard() {
