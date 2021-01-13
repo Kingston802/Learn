@@ -1,5 +1,17 @@
 const showdown = window.showdown;
-let converter = new showdown.Converter();
+const showdownKatex = window.showdownKatex;
+const converter = new showdown.Converter({
+    extensions: [
+      showdownKatex({
+        // maybe you want katex to throwOnError
+        throwOnError: true,
+        // disable displayMode
+        displayMode: false,
+        // change errorColor to blue
+        errorColor: '#1500ff',
+      }),
+    ],
+  });
 let clickMenu = false;
 let currentCard = 0;
 let values = [];
@@ -11,11 +23,11 @@ const form = document.querySelector('form');
 
 window.onload = () => {
   document.getElementById("url").addEventListener("keypress", (event) => {
+    // on form submission, prevent default
+    event.preventDefault();
     if(event.key === "Enter"){
         open();
     }
-    // on form submission, prevent default
-    event.preventDefault();
   });
 };
 
@@ -40,6 +52,13 @@ function updateCard() {
 async function cardData(url) {
   const re = /https?:\/\/github.com\/([a-zA-Z0-9-]*\/[^!@#$%^&*()_+-={}\[\];:'",<.>/?`~]+\/?)/
   matches = url.match(re);
+
+  // handle errors 
+  if (!matches) {
+    alert('Not a valid url! Make sure you are using the github repository')
+    location.reload();
+    return
+  }
 
   fetch('https://raw.githubusercontent.com/' + matches[1] + '/master/cards.md')
   .then(function(response) {
