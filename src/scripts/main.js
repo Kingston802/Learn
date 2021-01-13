@@ -3,19 +3,20 @@ let converter = new showdown.Converter();
 let clickMenu = false;
 let currentCard = 0;
 let values = [];
+let github_url = '';
+let formData = null;
 const card = document.querySelector('.card');
 const header = document.querySelector('header');
+const form = document.querySelector('form');
 
 window.onload = () => {
-  // console.log("loaded");
-  // document.addEventListener('click', open);
-  function submitOnEnter(event){
-      if(event.which === 13){
-          open();
-          event.preventDefault(); // Prevents the addition of a new line in the text field (not needed in a lot of cases)
-      }
-  }
-  document.getElementById("url").addEventListener("keypress", submitOnEnter);
+  document.getElementById("url").addEventListener("keypress", (event) => {
+    if(event.key === "Enter"){
+        open();
+    }
+    // on form submission, prevent default
+    event.preventDefault();
+  });
 };
 
 function updateCard() {
@@ -58,10 +59,12 @@ function open() {
   header.classList.add('hidden');
   
   // get url 
-  const exampleURL = 'https://github.com/Kingston802/Learn';
+  // const exampleURL = 'https://github.com/Kingston802/Learn';
+  github_url = document.getElementById('url').value;
+
 
   // download and open cards 
-  cardData(exampleURL);
+  cardData(github_url);
 
   card.addEventListener('click', (c) => {
     if(!card.classList.toggle('flipped')) {
