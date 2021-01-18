@@ -19,6 +19,7 @@ let currentCard = 0;
 let values = [];
 let github_url = '';
 let formData = null;
+let flipped = false;
 const card = document.querySelector('.card');
 const header = document.querySelector('header');
 const form = document.querySelector('form');
@@ -47,6 +48,7 @@ function updateCard() {
     <div class="back">
       ${ converter.makeHtml(back) }
     </div>
+    <img class="flip" src="img/flip.svg">
   `
   card.innerHTML = html;
 }
@@ -106,14 +108,23 @@ function open() {
   // const exampleURL = 'https://github.com/Kingston802/Learn';
   github_url = document.getElementById('url').value;
 
-
   // download and open cards 
   cardData(github_url);
 
   card.addEventListener('click', (c) => {
-    if(!card.classList.toggle('flipped')) {
+    if(flipped) {
+      flipped = false;
       currentCard += 1;
       updateCard();
+      card.classList.remove('flipped');
+    } else {
+      flipped = true;
+      card.classList.add('flipped');
+      document.querySelector('.flip').style.visibility = 'visible';
+      document.querySelector('.flip').addEventListener('click', (c) => {
+        c.stopPropagation();
+        card.classList.toggle('flipped');
+      });
     }
   });
 };

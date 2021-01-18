@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 16 15"
+   version="1.1"
+   x="0px"
+   y="0px"
+   id="svg14"
+   sodipodi:docname="flip.svg"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)">
+  <metadata
+     id="metadata20">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>use-inventory</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs18" />
+  <sodipodi:namedview
+     pagecolor="#000000"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="958"
+     inkscape:window-height="1041"
+     id="namedview16"
+     showgrid="false"
+     inkscape:zoom="34.866667"
+     inkscape:cx="3.7743987"
+     inkscape:cy="7.5"
+     inkscape:window-x="960"
+     inkscape:window-y="37"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg14" />
+  <title
+     id="title2">use-inventory</title>
+  <desc
+     id="desc4">Created with Sketch.</desc>
+  <g
+     stroke="none"
+     stroke-width="1"
+     fill="none"
+     fill-rule="evenodd"
+     id="g8">
+    <path
+       d="M0.762268674,5.70200306 L2.09026867,5.70200306 C2.57526867,9.09100306 5.49426867,11.7060031 9.01726867,11.7060031 C11.8852687,11.7060031 14.3522687,10.0460031 15.4332687,7.55300306 C15.6812687,6.97900306 15.3112687,6.32100306 14.6982687,6.19900306 C14.2382687,6.10700306 13.7782687,6.35000306 13.5952687,6.78200306 C12.8282687,8.58800306 11.0742687,9.70600306 9.02326867,9.70600306 C6.60626867,9.70600306 4.57726867,7.98400306 4.11226867,5.70200306 L5.29926867,5.70200306 C5.90426867,5.70200306 6.15626867,5.22300306 6.03126867,4.70200306 L3.61126867,0.416003065 C3.23926867,-0.109996935 2.74326867,-0.110996935 2.45026867,0.266003065 L0.0312686739,4.70200306 C-0.0937313261,5.11900306 0.157268674,5.70200306 0.762268674,5.70200306"
+       fill="#ffffff"
+       id="path6" />
+  </g>
+</svg>

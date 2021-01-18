@@ -16,6 +16,19 @@ body {
   height: 50vh;
   transition: all 0.2s;
   perspective: 9000px;
+  position: relative;
+  cursor: pointer;
+}
+.flip {
+  visibility: hidden;
+  position: absolute;
+  height: 2em;
+  width: 2em;
+  fill: white;
+  bottom: .5em;
+  right: 1em;
+  transition: all .4s;
+  animation: fade-out 1s;
 }
 .front, .back {
   padding: 2em;
