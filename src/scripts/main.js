@@ -37,10 +37,13 @@ window.onload = () => {
 function updateCard() {
   console.log(currentCard);
   if (currentCard > (values.length-1)/2) { 
+    // reached the end of the array
     window.alert('cards finished!');
     return
   }
-  let [ front, back ] = [ values[currentCard*2], values[currentCard*2+1] ];
+  // set the values for front and back 
+  const NUMBER_OF_SIDES = 2;
+  let [ front, back ] = [ values[currentCard*NUMBER_OF_SIDES], values[currentCard*NUMBER_OF_SIDES+1] ];
   let html = `
     <div class="front">
       ${ converter.makeHtml(front) }
@@ -112,12 +115,17 @@ function open() {
   cardData(github_url);
 
   card.addEventListener('click', (c) => {
+    // on main card click
     if(flipped) {
+      // if card is flipped
+      // move to next card
       flipped = false;
       currentCard += 1;
       updateCard();
       card.classList.remove('flipped');
     } else {
+      // if card is not flipped
+      // flip and add flipback button
       flipped = true;
       card.classList.add('flipped');
       document.querySelector('.flip').style.visibility = 'visible';
