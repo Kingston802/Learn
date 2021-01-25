@@ -32,9 +32,10 @@ window.onload = () => {
   });
 };
 
-function updateCard(create = false) {
+function updateCard(direction, create = false) {
+  console.trace();
   if (!create) {
-    currentCard += 1;
+    currentCard += direction ? 1 : -1;
   }
   console.log(currentCard);
   flipped = false;
@@ -76,7 +77,8 @@ async function cardData(url) {
     return response.text().then(function(text) {
       values = text.split(/\n/);
 
-      updateCard(true);
+      // update with create and a direction that does not matter 
+      updateCard(true, true);
       card.classList.remove('hidden');
     });
   });
@@ -86,20 +88,19 @@ function flipCard() {
     flipped = true;
     card.classList.add('flipped');
     document.querySelector('.flip').style.visibility = 'visible';
-    document.querySelector('.flip').addEventListener('click', (c) => {
-      c.stopPropagation();
-      card.classList.toggle('flipped');
-    });
 }
 
 function makeKeys() {
   document.addEventListener('keydown', (e) => {
     switch(e.key) {
       case 'ArrowRight': 
-        updateCard();
+        updateCard(true);
+        break;
+      case 'ArrowLeft': 
+        updateCard(false);
         break;
       case 'ArrowUp': 
-        flipCard();
+        document.querySelector('.flip').click();
         break;
       default:
         console.log(e.key);
@@ -126,11 +127,15 @@ function siteOpen() {
     if(flipped) {
       // if card is flipped
       // move to next card
-      updateCard();
+      updateCard(true);
     } else {
       // if card is not flipped
       // flip and add flipback button
       flipCard();
+      document.querySelector('.flip').addEventListener('click', (c) => {
+        c.stopPropagation();
+        card.classList.toggle('flipped');
+      });
     }
   });
 
