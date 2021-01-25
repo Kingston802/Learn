@@ -14,28 +14,31 @@ const converter = new showdown.Converter({
       }),
     ],
   });
-let clickMenu = false;
+
 let currentCard = 0;
 let values = [];
 let github_url = '';
-let formData = null;
 let flipped = false;
 const card = document.querySelector('.card');
 const header = document.querySelector('header');
-const form = document.querySelector('form');
 
 window.onload = () => {
   document.getElementById("url").addEventListener("keypress", (event) => {
     // on form submission, prevent default
     event.preventDefault();
     if(event.key === "Enter"){
-        open();
+        siteOpen();
     }
   });
 };
 
-function updateCard() {
+function updateCard(direction, create = false) {
+  console.trace();
+  if (!create) {
+    currentCard += direction ? 1 : -1;
+  }
   console.log(currentCard);
+  flipped = false;
   if (currentCard > (values.length-1)/2) { 
     // reached the end of the array
     window.alert('cards finished!');
@@ -54,11 +57,13 @@ function updateCard() {
     <img class="flip" src="img/flip.svg">
   `
   card.innerHTML = html;
+  // make sure card is not flipped
+  card.classList.remove('flipped');
 }
 
 async function cardData(url) {
   const re = /https?:\/\/github.com\/([a-zA-Z0-9-]*\/[^!@#$%^&*()_+-={}\[\];:'",<.>/?`~]+\/?)/
-  matches = url.match(re);
+  let matches = url.match(re);
 
   // handle errors 
   if (!matches) {
@@ -72,38 +77,41 @@ async function cardData(url) {
     return response.text().then(function(text) {
       values = text.split(/\n/);
 
-      // preprocess text 
-      // TODO: add support for multiline LaTeX expressions
-      // let tempArr = [];
-      // let stack = [];
-      // values.forEach((val) => {
-      //   console.log(stack);
-      //   if (stack.length > 1 && val === '```') {
-      //     // push whole expression into tempArr
-      //     stack.push(val);
-      //     tempArr.push(stack.join('\n'));
-      //     // clear stack
-      //     stack = [];
-      //   } else if (val.includes('```') || (stack.length > 0)) {
-      //     console.log('IN AN EXPRESSION');
-      //     stack.push(val);
-      //   } else {
-      //     tempArr.push(val);
-      //   }
-      // });
-
-      // values = tempArr;
-      // console.log(values);
-
-      updateCard();
+      // update with create and a direction that does not matter 
+      updateCard(true, true);
       card.classList.remove('hidden');
     });
   });
-
 }
 
-function open() {
+function flipCard() {
+    flipped = true;
+    card.classList.add('flipped');
+    document.querySelector('.flip').style.visibility = 'visible';
+}
+
+function makeKeys() {
+  document.addEventListener('keydown', (e) => {
+    switch(e.key) {
+      case 'ArrowRight': 
+        updateCard(true);
+        break;
+      case 'ArrowLeft': 
+        updateCard(false);
+        break;
+      case 'ArrowUp': 
+        document.querySelector('.flip').click();
+        break;
+      default:
+        console.log(e.key);
+    }
+  });
+}
+
+function siteOpen() {
+  // remove document click 
   document.removeEventListener('click', open);
+
   // hide header
   header.classList.add('hidden');
   
@@ -114,26 +122,24 @@ function open() {
   // download and open cards 
   cardData(github_url);
 
-  card.addEventListener('click', (c) => {
+  card.addEventListener('click', () => {
     // on main card click
     if(flipped) {
       // if card is flipped
       // move to next card
-      flipped = false;
-      currentCard += 1;
-      updateCard();
-      card.classList.remove('flipped');
+      updateCard(true);
     } else {
       // if card is not flipped
       // flip and add flipback button
-      flipped = true;
-      card.classList.add('flipped');
-      document.querySelector('.flip').style.visibility = 'visible';
+      flipCard();
       document.querySelector('.flip').addEventListener('click', (c) => {
         c.stopPropagation();
         card.classList.toggle('flipped');
       });
     }
   });
+
+  // add keypress listener
+  makeKeys();
 };
 
