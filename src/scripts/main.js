@@ -16,13 +16,17 @@ const converter = new showdown.Converter({
   });
 
 let currentCard = 0;
+let currentAnno = 0;
 let values = [];
 let github_url = '';
 let flipped = false;
 const card = document.querySelector('.card');
 const header = document.querySelector('header');
+const annotationDiv = document.querySelector('.annotations');
+const annotations = document.querySelectorAll('.annotations div');
 
 window.onload = () => {
+  setInterval(changeAnnotation, 3000);
   document.getElementById("url").addEventListener("keypress", (event) => {
     // on form submission, prevent default
     event.preventDefault();
@@ -32,8 +36,26 @@ window.onload = () => {
   });
 };
 
+function changeAnnotation() {
+
+  currentAnno += 1;
+
+  if (annotations[currentAnno]) {
+    console.log(annotations);
+    if (currentAnno >= 1) {
+      annotations[currentAnno-1].classList.add('hidden');
+      annotations[currentAnno].classList.remove('hidden');
+    } else {
+      annotations[annotations.length-1].classList.add('hidden');
+      annotations[currentAnno].classList.remove('hidden');
+    }
+  } else {
+    // reached the end 
+    currentAnno = 0;
+  }
+}
+
 function updateCard(direction, create = false) {
-  console.trace();
   if (!create) {
     currentCard += direction ? 1 : -1;
   }
@@ -114,6 +136,8 @@ function siteOpen() {
 
   // hide header
   header.classList.add('hidden');
+  // hide annotations
+  annotationDiv.classList.add('hidden');
   
   // get url 
   // const exampleURL = 'https://github.com/Kingston802/Learn';
