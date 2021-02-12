@@ -3,17 +3,20 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
-  overflow: hidden;
+  transition: height 1s, margin 1s, padding 1s;
 }
 body {
   height: 100vh;
   width: 100vw;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .card {
   margin: .5em auto;
-  width: 40vw;
-  height: 50vh;
+  width: 50em;
+  height: 40em;
   transition: all 0.2s;
   perspective: 9000px;
   position: relative;
@@ -63,7 +66,7 @@ body {
 
 header {
   display: flex;
-  margin: 40vh 20vw;  
+  margin: 35vh 20vw;  
   justify-content: space-between;
 }
 header h1 {
@@ -79,7 +82,7 @@ header form {
 }
 #url {
   height: 2.5em;
-  width: 30vw;
+  width: 25em;
   padding: 1em;
   border: 3px solid #ccc;
   border-radius: 15px;
@@ -91,13 +94,25 @@ header form {
   border: 3px solid #555;
 }
 
+.annotations { 
+  text-align: center;
+  color: gray;
+}
+
+.annotations div {
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
+
+.annotations div:hover {
+  text-decoration: underline;
+}
+
 .hidden {
   opacity: 0;
   height: 0;
-  margin: 0;
-  margin-top: 1em;
+  margin: 0 !important;
   padding: 0;
-  transition: height 1s, margin 1s, padding 1s;
   animation: fade-out 1s;
 }
 @keyframes fade-in {
