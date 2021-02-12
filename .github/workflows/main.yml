@@ -25,8 +25,8 @@ jobs:
       - name: Auto Minify
         uses: nizarmah/auto-minify@master
         with:
-          directory: 'js'
-          output: 'mini_js'
+          directory: './src'
+          output: '.'
 
       # Auto commits minified files to the repository
       # Ignore it if you don't want to commit the files to the repository 
