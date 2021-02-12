@@ -26,6 +26,11 @@ const annotationDiv = document.querySelector('.annotations');
 const annotations = document.querySelectorAll('.annotations div');
 
 window.onload = () => {
+  annotations.forEach((a) => {
+    a.addEventListener('click', () => {
+      location.href = a.textContent; 
+    }); 
+  });
   setInterval(changeAnnotation, 3000);
   document.getElementById("url").addEventListener("keypress", (event) => {
     // on form submission, prevent default
@@ -52,6 +57,8 @@ function changeAnnotation() {
   } else {
     // reached the end 
     currentAnno = 0;
+    annotations[annotations.length-1].classList.add('hidden');
+    annotations[currentAnno].classList.remove('hidden');
   }
 }
 
