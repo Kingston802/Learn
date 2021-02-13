@@ -23,16 +23,22 @@ body {
   position: relative;
   cursor: pointer;
 }
-.flip {
+.button {
   visibility: hidden;
   position: absolute;
   height: 2em;
   width: 2em;
   fill: white;
-  bottom: .5em;
-  right: 1em;
   transition: all .4s;
   animation: fade-out 1s;
+}
+.flip {
+  right: 1em;
+  bottom: .5em;
+}
+.last {
+  left: 1em;
+  bottom: 1em;
 }
 .front, .back {
   padding: 2em;
