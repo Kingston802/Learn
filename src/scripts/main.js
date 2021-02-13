@@ -50,7 +50,7 @@ function changeAnnotation() {
   currentAnno += 1;
 
   if (annotations[currentAnno]) {
-    console.log(annotations);
+    // console.log(annotations);
     if (currentAnno >= 1) {
       annotations[currentAnno-1].classList.add('hidden');
       annotations[currentAnno].classList.remove('hidden');
@@ -70,11 +70,16 @@ function updateCard(direction, create = false) {
   if (!create) {
     currentCard += direction ? 1 : -1;
   }
-  console.log(currentCard);
+
   flipped = false;
   if (currentCard > (values.length-1)/2) { 
     // reached the end of the array
     window.alert('cards finished!');
+    return
+  }
+  if (currentCard < 0) { 
+    // went off the array
+    window.alert('wrong way!');
     return
   }
   // set the values for front and back 
@@ -87,7 +92,8 @@ function updateCard(direction, create = false) {
     <div class="back">
       ${ converter.makeHtml(back) }
     </div>
-    <img class="flip" src="img/flip.svg">
+    <img class="button flip" src="img/flip.svg">
+    <img class="button last" src="img/back.svg">
   `
   card.innerHTML = html;
   // make sure card is not flipped
@@ -121,6 +127,7 @@ function flipCard() {
     flipped = true;
     card.classList.add('flipped');
     document.querySelector('.flip').style.visibility = 'visible';
+    document.querySelector('.last').style.visibility = 'visible';
 }
 
 function makeKeys() {
@@ -136,7 +143,7 @@ function makeKeys() {
         document.querySelector('.flip').click();
         break;
       default:
-        console.log(e.key);
+        // console.log(e.key);
     }
   });
 }
@@ -170,6 +177,10 @@ function siteOpen() {
       document.querySelector('.flip').addEventListener('click', (c) => {
         c.stopPropagation();
         card.classList.toggle('flipped');
+      });
+      document.querySelector('.last').addEventListener('click', (c) => {
+        c.stopPropagation();
+        updateCard(false);
       });
     }
   });
