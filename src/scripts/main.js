@@ -31,7 +31,11 @@ window.onload = () => {
       location.href = a.textContent; 
     }); 
   });
-  setInterval(changeAnnotation, 3000);
+
+
+  // start changing annotations 
+  const DISPLAY_LENGTH = 9000;
+  setInterval(changeAnnotation, DISPLAY_LENGTH);
   document.getElementById("url").addEventListener("keypress", (event) => {
     // on form submission, prevent default
     event.preventDefault();
