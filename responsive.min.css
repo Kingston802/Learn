@@ -1,0 +1,1 @@
+@media only screen and (max-width:600px){header{margin:0;display:flex;height:80vh;flex-direction:column;justify-content:center}header span{font-size:.5em;flex-direction:column;text-align:center;padding:2em}#url{width:90vw;padding:.1em}.annotations{font-size:.8em}.card:not(.hidden){width:90vw;height:95vh}.back,.front{padding:1em;font-size:1.5em}.katex{text-align:center}}
