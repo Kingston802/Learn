@@ -1,0 +1,50 @@
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 600px) { 
+  header {
+    margin: 0;
+    display:flex;
+    height: 80vh;
+    flex-direction: column;
+    justify-content: center;
+  }
+  header span {
+    font-size: .5em;
+    flex-direction: column;
+    text-align: center;
+    padding: 2em;
+  }
+  #url {
+    width: 90vw;
+    padding: .1em;
+  }
+  .annotations {
+    font-size: .8em;
+  }
+
+  .card:not(.hidden) {
+    width: 90vw;
+    height: 95vh;
+  }
+  .front, .back {
+    padding: 1em;
+    font-size: 1.5em;
+  }
+  .katex {
+    text-align: center;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  justify-content: space-around;
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+}
